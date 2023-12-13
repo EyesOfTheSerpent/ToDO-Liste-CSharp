@@ -1,18 +1,11 @@
 ﻿
 namespace ToDO_Liste
 {
-    internal class ToDoObjekt
+    internal class ToDoObjekt(string name, string desc, string date)
     {
-        public string Name { get; private set; }
-        public string Desc { get; private set; }
-        public string Date { get; private set; }
-
-        public ToDoObjekt(string name, string desc, string date)
-        {
-            Name = name;
-            Desc = desc;
-            Date = date;
-        }
+        public string Name { get; private set; } = name;
+        public string Desc { get; private set; } = desc;
+        public string Date { get; private set; } = date;
 
         public void ShowInfo()
         {

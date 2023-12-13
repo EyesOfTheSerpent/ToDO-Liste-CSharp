@@ -5,6 +5,7 @@ namespace ToDO_Liste
     {
         public List<ToDoObjekt> ToDoList { get; private set; } = [];
         private static readonly string NL = Environment.NewLine;
+        private static int ErrorInt;
 
         /****************************************************************************/
 
@@ -16,6 +17,12 @@ namespace ToDO_Liste
             Console.WriteLine("2. Les alle oppgavene.");
             Console.WriteLine("3. Slett oppgave.");
             Console.WriteLine($"4. Avslutt program.{NL}");
+        }
+
+        private static void ErrorMenu()
+        {
+            MainMenu();
+            Console.WriteLine("Du skrev ikke et tall, prøv igjen.");
         }
 
         public void AskUser()
@@ -52,8 +59,8 @@ namespace ToDO_Liste
         {
             int tall;
             while (!int.TryParse(Console.ReadLine(), out tall))
-                Console.WriteLine("Du skrev ikke et tall, prøv igjen.");
-            
+                ErrorMenu();
+
             switch (tall)
             {
                 case 1:
@@ -85,15 +92,16 @@ namespace ToDO_Liste
         public void AddTask()
         {
             MainMenu();
-            Console.WriteLine("Please add a name to the task.");
+            Console.WriteLine("Vennligst legg til et navn.");
             string taskName = ForceInput();
-            Console.WriteLine("Please add a description.");
+            Console.WriteLine("Vennligst legg til en beskrivelse.");
             string taskDesc = ForceInput();
             var date = DateTime.Now.ToString("dd/MM HH:mm");
             
             ToDoList.Add(new ToDoObjekt(taskName, taskDesc, date));
 
-            Console.WriteLine($"Added new task! ({taskName})");
+            Console.WriteLine($"Lagt til ny task! ({taskName})");
+            Console.WriteLine("Trykk på uansett knapp for å fortsette...");
             Console.ReadKey();
             AskUser();
         }
@@ -104,17 +112,17 @@ namespace ToDO_Liste
             //!myList.Any()
             if (ToDoList.Count == 0)
             {
-                Console.WriteLine($"No tasks to display!{NL}");
+                Console.WriteLine($"Ingen tasks å vise!{NL}");
             }
             else
             {
-                Console.WriteLine($"Showing all tasks:{NL}");
+                Console.WriteLine($"Viser frem tasks:{NL}");
                 foreach (var task in ToDoList)
                 {
                     task.ShowInfo();
                 }
             }
-            Console.WriteLine("Press any key to continue...");
+            Console.WriteLine("Trykk på uansett knapp for å fortsette...");
             Console.ReadKey();
             AskUser();
         }
@@ -124,11 +132,11 @@ namespace ToDO_Liste
             MainMenu();
             if (ToDoList.Count == 0)
             {
-                Console.WriteLine($"No tasks to delete!{NL}");
+                Console.WriteLine($"Ingen tasks å slette!{NL}");
             }
             else
             {
-                Console.WriteLine("Please specify what task you want to remove (by name).");
+                Console.WriteLine("Vennligst si hvilken task (ved hjelp av navn) du ønsker å fjerne.");
                 var taskToRemove = ForceInput();
                 var LocateName = ToDoList.Find(delegate (ToDoObjekt ObjName)
                 {
@@ -138,14 +146,14 @@ namespace ToDO_Liste
                 if (LocateName != null)
                 {
                     ToDoList.Remove(LocateName);
-                    Console.WriteLine("Task deleted successfully");
+                    Console.WriteLine("Task har blitt slettet!");
                 }
                 else
                 {
-                    Console.WriteLine("Task not found.");
+                    Console.WriteLine("Fant ikke task du så etter.");
                 }
             }
-            Console.WriteLine("Please press any key to continue...");
+            Console.WriteLine("Trykk på uansett knapp for å fortsette...");
             Console.ReadKey();
             AskUser();
         }
