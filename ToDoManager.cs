@@ -5,7 +5,6 @@ namespace ToDO_Liste
     {
         public List<ToDoObjekt> ToDoList { get; private set; } = [];
         private static readonly string NL = Environment.NewLine;
-        private static int ErrorInt;
 
         /****************************************************************************/
 
