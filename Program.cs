@@ -6,16 +6,6 @@ namespace ToDO_Liste
     {
         private static void Main()
         {
-            //ArgumentNullException.ThrowIfNull(args);
-
-            //RunCode();
-            StyleConsole();
-            var toDo = new ToDoManager();
-            toDo.AskUser();
-        }
-
-        private static void RunCode()
-        {
             StyleConsole();
             var toDo = new ToDoManager();
             toDo.AskUser();
@@ -23,10 +13,8 @@ namespace ToDO_Liste
 
         private static void StyleConsole() 
         {
-            Console.Title = "ToDo Liste";
             Console.ForegroundColor = ConsoleColor.Red;
             Console.BackgroundColor = ConsoleColor.Black;
-
         }
 
         /*
