@@ -81,7 +81,7 @@ namespace ToDO_Liste
             string UserInput = Console.ReadLine() ?? String.Empty;
             return UserInput switch
             {
-                null or "" => ForceNumber(),
+                null or "" => ForceInput(),
                 _ => UserInput,
             };
         }
